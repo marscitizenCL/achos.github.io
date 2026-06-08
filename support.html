@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Achos</title>
+<meta name="description" content="Support for Achos, the audiophile music player for macOS. Get help, report bugs, and contact the developer.">
+<link rel="icon" type="image/png" href="assets/images/achos-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #4A9EFF;
+    --blue-dim: rgba(74,158,255,0.12);
+    --gold: #C9A227;
+    --gold-dim: rgba(201,162,39,0.12);
+    --bg: #0a0a0a;
+    --bg-surface: #111111;
+    --bg-card: #161616;
+    --text-primary: #f0ede8;
+    --text-secondary: #9a9590;
+    --text-muted: #5a5550;
+    --border: rgba(255,255,255,0.07);
+    --border-blue: rgba(74,158,255,0.2);
+    --border-gold: rgba(201,162,39,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-helmet { width: 28px; height: 28px; }
+
+  .nav-name {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  .page-hero {
+    padding: 5rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .page-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--gold);
+  }
+
+  .page-hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .page-hero p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    max-width: 580px;
+  }
+
+  /* ── CONTENT ── */
+  .content-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ── CONTACT CARDS ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: var(--border-blue);
+    transform: translateY(-2px);
+  }
+
+  .contact-card.primary {
+    border-color: var(--border-blue);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(74,158,255,0.04) 100%);
+  }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    background: var(--blue-dim);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-icon svg { width: 20px; height: 20px; }
+
+  .card-icon.gold-icon { background: var(--gold-dim); }
+
+  .contact-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card-link {
+    color: var(--blue);
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .card-link:hover { gap: 10px; }
+
+  /* ── FAQ ── */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .faq-list { margin-bottom: 4rem; }
+
+  details {
+    border-bottom: 1px solid var(--border);
+  }
+
+  details:first-of-type {
+    border-top: 1px solid var(--border);
+  }
+
+  summary {
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    transition: color 0.2s;
+  }
+
+  summary:hover { color: var(--blue); }
+
+  summary::-webkit-details-marker { display: none; }
+
+  .faq-arrow {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.25s, color 0.2s;
+  }
+
+  details[open] .faq-arrow {
+    transform: rotate(180deg);
+    color: var(--gold);
+  }
+
+  .faq-body {
+    padding: 0 0 1.5rem;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 680px;
+  }
+
+  .faq-body p { margin-bottom: 0.75rem; }
+  .faq-body p:last-child { margin-bottom: 0; }
+
+  .faq-body ul {
+    list-style: none;
+    margin: 0.75rem 0;
+    padding: 0;
+  }
+
+  .faq-body ul li {
+    padding: 0.3rem 0 0.3rem 1.25rem;
+    position: relative;
+  }
+
+  .faq-body ul li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
+
+  .faq-body a { color: var(--blue); }
+  .faq-body strong { color: var(--text-primary); font-weight: 400; }
+
+  /* ── SYSTEM REQ ── */
+  .requirements-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    border-radius: 0 0 8px 8px;
+    padding: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .req-item {}
+
+  .req-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .req-value {
+    color: var(--text-secondary);
+    font-size: 15px;
+  }
+
+  /* ── KNOWN ISSUES ── */
+  .issue-list { margin-bottom: 4rem; }
+
+  .issue-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .issue-badge {
+    flex-shrink: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    height: fit-content;
+    margin-top: 3px;
+  }
+
+  .badge-known {
+    background: rgba(201,162,39,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(201,162,39,0.3);
+  }
+
+  .badge-fixed {
+    background: rgba(74,158,255,0.12);
+    color: var(--blue);
+    border: 1px solid rgba(74,158,255,0.2);
+  }
+
+  .issue-text {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .issue-text strong { color: var(--text-primary); font-weight: 400; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex; gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--blue); }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .page-hero { padding: 3rem 1.25rem 2rem; }
+    .content-wrap { padding: 2.5rem 1.25rem 4rem; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="assets/images/achos-icon.png" alt="Achos" style="width:28px;height:28px;border-radius:6px;object-fit:cover;">
+    <span class="nav-name">ACHOS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="support.html" style="color: var(--gold);">Support</a></li>
+    <li><a href="privacy-policy.html">Privacy</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-label">Help Center</div>
+  <h1>Support</h1>
+  <p>Questions, bug reports, or feature requests — we're here. Achos is crafted by a single developer who takes sound seriously.</p>
+</div>
+
+<div class="content-wrap">
+
+  <!-- CONTACT CHANNELS -->
+  <div class="section-title">Get in touch</div>
+  <div class="contact-grid">
+
+    <div class="contact-card primary">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+      <h3>Email Support</h3>
+      <p>For bug reports, feature requests, or anything that needs a detailed conversation. We aim to respond within 48 hours.</p>
+      <a href="mailto:support@achos.app" class="card-link">support@achos.app →</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="card-icon gold-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <h3>GitHub Issues</h3>
+      <p>For reproducible bugs, submit an issue with steps to reproduce, your macOS version, and the Achos version number.</p>
+      <a href="https://github.com/mga-dev/achos/issues" class="card-link" target="_blank" rel="noopener">Open an issue →</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <h3>Community</h3>
+      <p>Join discussions on r/audiophile and r/MacOS where the Achos community exchanges tips and recommendations.</p>
+      <a href="https://reddit.com/r/audiophile" class="card-link" target="_blank" rel="noopener">r/audiophile →</a>
+    </div>
+
+  </div>
+
+  <!-- SYSTEM REQUIREMENTS -->
+  <div class="section-title">System requirements</div>
+  <div class="requirements-box">
+    <div class="req-grid">
+      <div class="req-item">
+        <span class="req-label">Platform</span>
+        <span class="req-value">macOS only</span>
+      </div>
+      <div class="req-item">
+        <span class="req-label">Processor</span>
+        <span class="req-value">Apple Silicon (M1 or later)</span>
+      </div>
+      <div class="req-item">
+        <span class="req-label">macOS Version</span>
+        <span class="req-value">macOS 14 Sonoma or later</span>
+      </div>
+      <div class="req-item">
+        <span class="req-label">Storage</span>
+        <span class="req-value">~50 MB for the app</span>
+      </div>
+      <div class="req-item">
+        <span class="req-label">Audio Formats</span>
+        <span class="req-value">FLAC, ALAC, WAV, DSD64/DSD128, OGG, MP3</span>
+      </div>
+      <div class="req-item">
+        <span class="req-label">AI Features</span>
+        <span class="req-value">Requires Google Gemini API key (free tier available)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-title">Frequently asked questions</div>
+  <div class="faq-list">
+
+    <details>
+      <summary>
+        What does "BitPerfect" playback mean?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>BitPerfect means Achos sends audio data to your DAC exactly as it exists in the file — no resampling, no volume normalization, no DSP processing of any kind. The bits that leave your Mac are identical to the bits in your music file.</p>
+        <p>Achos achieves this through <strong>Exclusive Mode (Hog Mode)</strong>, which takes exclusive control of your audio hardware and bypasses macOS CoreAudio's mixing engine entirely. This prevents any other application from sharing the audio device during playback.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        What is AI Filemaster and how does it work?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>AI Filemaster analyses the spectral fingerprint of your audio file and uses Google Gemini AI to return a forensic verdict:</p>
+        <ul>
+          <li><strong>Verified</strong> — frequency content is consistent with the claimed format</li>
+          <li><strong>Inconclusive</strong> — analysis cannot confirm or deny authenticity</li>
+          <li><strong>Likely Upsampled</strong> — a lower-resolution file has been resampled to a higher one</li>
+          <li><strong>Likely Converted</strong> — the file appears to have been converted from a lossy source (e.g. MP3-to-FLAC)</li>
+        </ul>
+        <p>This feature requires a Google Gemini API key, which you enter once in Achos Preferences. Your key is stored securely in macOS Keychain. The spectral fingerprint (not your audio file) is sent to Google's API for analysis.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        How do I set up DSD playback?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>Achos supports DSD playback via <strong>DoP (DSD over PCM)</strong>, which is compatible with most modern DACs that support DSD. To enable DSD playback:</p>
+        <ul>
+          <li>Connect a DSD-capable DAC</li>
+          <li>Open Achos Preferences → Audio</li>
+          <li>Select your DAC as the output device</li>
+          <li>Enable "DSD over PCM (DoP)" in the output format settings</li>
+        </ul>
+        <p>Achos supports DSD64 and DSD128. Native DSD (without DoP) depends on whether your DAC driver supports it on macOS. Confirm with your DAC manufacturer if you are unsure.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        How does Discogs Pressing Intelligence work?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>When you play a track, Achos queries the Discogs database using the file's metadata (artist, album, title) to identify the most likely exact pressing you own. It cross-references matrix numbers, catalog numbers, and country data from Discogs to surface pressing-specific information including collectors' notes and market value.</p>
+        <p>This feature requires connecting your Discogs account via OAuth in Achos Preferences → Integrations. Achos never stores your Discogs password — authentication is handled securely through the OAuth flow.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        I get a "format fraud" warning. What does that mean?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>"Format fraud" refers to files that are labeled as high-resolution audio (e.g. 24-bit/96kHz FLAC) but whose actual audio content reveals they were converted from a lower-quality source — typically an MP3 or CD-quality file.</p>
+        <p>This is a common issue with some online music stores that sell "hi-res" files which are actually upsampled from CD masters or lossy sources. Achos detects this by analysing the spectral content: a genuine hi-res recording has meaningful audio content above 20 kHz; an upsampled file typically shows an abrupt cutoff in the spectral view.</p>
+        <p>The AI Filemaster feature provides a more nuanced verdict, distinguishing between upsampling, lossy conversion, and authentic high-resolution content.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        What is GRaiL and what does it generate?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>GRaiL (Guided Research for Audiophile Insight and Listening) generates an AI-powered narrative about the recording you are playing. This includes:</p>
+        <ul>
+          <li>Recording history and studio context</li>
+          <li>Artist biography and cultural significance</li>
+          <li>Pressing and mastering lineage</li>
+          <li>Listening notes and audiophile context</li>
+        </ul>
+        <p>GRaiL uses Google Gemini to generate original text — it is not a lookup. Results quality depends on how well-documented the recording is. It works best with classic jazz, rock, and classical recordings that have rich documented histories.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Does Achos work with Intel Macs?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>No. Achos v1.0 is compiled exclusively for Apple Silicon (M1 and later). Intel Mac support is not planned for the current version. The decision to target Apple Silicon only allowed us to optimise the DSP and spectral analysis pipeline for the ARM architecture and the Unified Memory model.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        How do I report a bug?
+        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="faq-body">
+        <p>Please include the following when reporting a bug:</p>
+        <ul>
+          <li>Achos version number (found in Achos → About Achos)</li>
+          <li>macOS version and Mac model</li>
+          <li>Audio output device (DAC model if applicable)</li>
+          <li>Steps to reproduce the issue</li>
+          <li>The audio format involved (FLAC, DSD, etc.) if relevant</li>
+        </ul>
+        <p>Send bug reports to <a href="mailto:support@achos.app">support@achos.app</a> or open a GitHub issue. Crash logs from Console.app are very helpful if you can attach them.</p>
+      </div>
+    </details>
+
+  </div>
+
+  <!-- KNOWN ISSUES -->
+  <div class="section-title">Known issues — v1.0</div>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="issue-badge badge-known">Known</span>
+      <div class="issue-text"><strong>DSD128 via DoP on certain DACs:</strong> Some USB DAC models require a manual sample rate override. If DSD128 playback produces noise or silence, set the CoreAudio output rate to 352.8 kHz manually in Audio MIDI Setup.</div>
+    </div>
+    <div class="issue-item">
+      <span class="issue-badge badge-known">Known</span>
+      <div class="issue-text"><strong>Discogs collection sync with large libraries:</strong> Collections over 5,000 items may take several minutes to sync on first connection. Subsequent syncs are incremental and fast.</div>
+    </div>
+    <div class="issue-item">
+      <span class="issue-badge badge-known">Known</span>
+      <div class="issue-text"><strong>GRaiL results for obscure recordings:</strong> AI narrative quality degrades for releases with limited online documentation. We are investigating supplementary sources for the next update.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">ACHOS · FOR THE GUARDIANS OF SOUND</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

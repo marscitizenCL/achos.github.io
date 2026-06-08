@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achos — Where your vinyl and your files finally share a shelf</title>
+<meta name="description" content="Achos is the macOS music player built for collectors. BitPerfect playback, AI file forensics, Discogs integration, and GRaiL musical narratives. For the Guardians of Sound.">
+<meta property="og:title" content="Achos — For the Guardians of Sound">
+<meta property="og:description" content="Where your vinyl and your files finally share a shelf. The only macOS player that bridges your Discogs collection and your digital library.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://marscitizencl.github.io/achos.github.io">
+<meta property="og:image" content="https://marscitizencl.github.io/achos.github.io/assets/images/screenshot-hero-2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marscitizencl.github.io/achos.github.io/assets/images/screenshot-hero-2.png">
+<link rel="icon" type="image/png" href="assets/images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #4A9EFF; --blue-dim: rgba(74,158,255,0.1); --blue-border: rgba(74,158,255,0.22);
+  --gold: #C9A227; --gold-dim: rgba(201,162,39,0.1); --gold-border: rgba(201,162,39,0.28);
+  --bg: #080808; --bg-1: #0e0e0e; --bg-2: #141414; --bg-3: #1a1a1a;
+  --text-1: #f2efe9; --text-2: #9a9590; --text-3: #5c5650;
+  --border: rgba(255,255,255,0.065); --border-md: rgba(255,255,255,0.1);
+  --max: 1140px; --max-text: 760px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-1); font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 3px; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+.section-eyebrow { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; }
+.section-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 64px; display: flex; align-items: center; border-bottom: 1px solid transparent; transition: background 0.35s, border-color 0.35s; padding: 0 2rem; }
+nav.scrolled { background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-color: var(--border); }
+.nav-inner { max-width: var(--max); margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo { width: 28px; height: 28px; object-fit: contain; opacity: 0.9; }
+.nav-name { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 600; letter-spacing: 0.14em; color: var(--text-1); }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--text-2); text-decoration: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text-1); }
+.nav-cta { background: var(--blue) !important; color: #fff !important; padding: 8px 18px !important; border-radius: 4px; font-size: 10px !important; }
+.nav-cta:hover { opacity: 0.88; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 2rem 80px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(74,158,255,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 70%, rgba(201,162,39,0.04) 0%, transparent 60%); }
+.hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%); opacity: 0.4; }
+.hero-inner { max-width: var(--max); margin: 0 auto; width: 100%; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-text { max-width: 560px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-dim); border: 1px solid var(--gold-border); border-radius: 2px; padding: 5px 12px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+.hero-badge-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-h1 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; color: var(--text-1); margin-bottom: 1.5rem; }
+.hero-h1 em { font-style: normal; color: var(--gold); }
+.hero-sub { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-2); line-height: 1.8; margin-bottom: 2.5rem; max-width: 460px; }
+.hero-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--blue); color: #fff; text-decoration: none; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px; border-radius: 3px; transition: opacity 0.2s, transform 0.2s; }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; color: var(--text-2); text-decoration: none; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 0; transition: color 0.2s; }
+.btn-secondary:hover { color: var(--text-1); }
+.hero-price { margin-top: 1.75rem; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.1em; color: var(--text-3); }
+.hero-price strong { color: var(--text-2); font-weight: 400; }
+
+/* HERO VISUAL */
+.hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+.screen-frame { width: 100%; max-width: 480px; background: var(--bg-2); border: 1px solid var(--border-md); border-radius: 16px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
+.screen-bar { height: 32px; background: var(--bg-3); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 14px; gap: 6px; }
+.screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+.screen-dot.red { background: #ff5f57; } .screen-dot.yellow { background: #febc2e; } .screen-dot.green { background: #28c840; }
+.screen-img { width: 100%; display: block; }
+
+/* COFI HERO BADGE */
+.hero-cofi-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(74,158,255,0.06); border: 1px solid var(--blue-border); border-radius: 2px; padding: 5px 12px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+
+/* STATS */
+.stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-1); padding: 2rem; }
+.stats-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+.stat-item { text-align: center; padding: 1rem 1.5rem; border-right: 1px solid var(--border); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 500; color: var(--text-1); display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
+.stat-num span { color: var(--gold); }
+.stat-num.blue-num span { color: var(--blue); }
+.stat-label { font-size: 11px; color: var(--text-3); letter-spacing: 0.05em; line-height: 1.4; }
+
+/* PROBLEM */
+.section-problem { padding: 8rem 2rem; max-width: var(--max-text); margin: 0 auto; text-align: center; }
+.problem-quote { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; line-height: 1.6; color: var(--text-1); margin-bottom: 3rem; position: relative; }
+.problem-quote::before { content: '"'; font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold-border); position: absolute; top: -1.5rem; left: -1rem; line-height: 1; }
+.problem-divider { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 3rem; opacity: 0.5; }
+.problem-body { color: var(--text-2); font-size: 1.05rem; line-height: 1.9; max-width: 600px; margin: 0 auto 2rem; }
+.problem-body strong { color: var(--text-1); font-weight: 400; }
+.problem-tension { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; padding: 2.5rem; background: var(--bg-1); border: 1px solid var(--border); max-width: 600px; margin: 3rem auto; }
+.tension-side { text-align: center; }
+.tension-icon { width: 48px; height: 48px; margin: 0 auto 0.75rem; opacity: 0.6; }
+.tension-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); display: block; margin-bottom: 0.25rem; }
+.tension-sub { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.tension-bridge { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tension-bridge-line { width: 1px; height: 30px; background: var(--border-md); }
+.tension-bridge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+
+/* FEATURES */
+.section-features { padding: 6rem 2rem 8rem; background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.features-header { max-width: var(--max); margin: 0 auto 5rem; text-align: center; }
+.section-h2 { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: 0.02em; color: var(--text-1); line-height: 1.2; margin-bottom: 1rem; }
+.section-sub { color: var(--text-2); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.8; }
+.features-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.feature-card { background: var(--bg-1); padding: 2.5rem 2rem; transition: background 0.25s; }
+.feature-card:hover { background: var(--bg-2); }
+.feature-card.wide { grid-column: span 2; }
+.feature-num { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.18em; color: var(--text-3); margin-bottom: 1.25rem; display: block; }
+.feature-icon-wrap { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.feature-icon-wrap.blue { background: var(--blue-dim); border: 1px solid var(--blue-border); }
+.feature-icon-wrap.gold { background: var(--gold-dim); border: 1px solid var(--gold-border); }
+.feature-icon-wrap svg { width: 22px; height: 22px; }
+.feature-title { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-1); margin-bottom: 0.75rem; }
+.feature-desc { color: var(--text-2); font-size: 14px; line-height: 1.75; margin-bottom: 1.25rem; }
+.feature-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.feature-pill { font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+.feature-pill.blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.feature-pill.gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+.feature-screenshot { margin-top: 1.5rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
+.feature-screenshot img { width: 100%; display: block; }
+
+/* SCREENSHOTS SHOWCASE */
+.section-showcase { padding: 0 2rem 6rem; background: var(--bg-1); }
+.showcase-inner { max-width: var(--max); margin: 0 auto; }
+.showcase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.showcase-item { }
+.showcase-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+.showcase-label::before { content: ''; width: 16px; height: 1px; background: var(--text-3); }
+.showcase-frame { background: var(--bg-2); border: 1px solid var(--border-md); border-radius: 12px; overflow: hidden; }
+.showcase-bar { height: 28px; background: var(--bg-3); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; gap: 5px; }
+.showcase-dot { width: 9px; height: 9px; border-radius: 50%; }
+.showcase-frame img { width: 100%; display: block; }
+
+/* GUARDIAN'S PATH */
+.section-path { padding: 8rem 2rem; }
+.path-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.path-steps { margin-top: 3rem; }
+.path-step { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; position: relative; }
+.path-step::before { content: ''; position: absolute; left: 19px; top: 44px; bottom: -2.5rem; width: 1px; background: linear-gradient(to bottom, var(--border-md), transparent); }
+.path-step:last-child::before { display: none; }
+.path-step-num { width: 40px; height: 40px; flex-shrink: 0; border: 1px solid var(--border-md); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 500; color: var(--gold); background: var(--bg-1); }
+.path-step-content { padding-top: 6px; }
+.path-step-title { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-1); margin-bottom: 0.4rem; }
+.path-step-desc { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+.path-visual { }
+.path-screen { background: var(--bg-2); border: 1px solid var(--border-md); border-radius: 12px; overflow: hidden; }
+.path-screen-bar { height: 28px; background: var(--bg-3); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+.path-screen-dot { width: 9px; height: 9px; border-radius: 50%; }
+.path-screen img { width: 100%; display: block; }
+
+/* COMPARISON */
+.section-compare { padding: 8rem 2rem; background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.compare-inner { max-width: var(--max); margin: 0 auto; }
+.compare-header { text-align: center; margin-bottom: 4rem; }
+.compare-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.compare-table th { font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 1.25rem 1.5rem; text-align: left; background: var(--bg-2); border-bottom: 1px solid var(--border-md); color: var(--text-2); }
+.compare-table th.col-achos { background: rgba(74,158,255,0.06); color: var(--blue); border-bottom-color: var(--blue-border); }
+.compare-table td { padding: 1rem 1.5rem; font-size: 14px; color: var(--text-2); border-bottom: 1px solid var(--border); vertical-align: middle; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td.col-feature { color: var(--text-1); font-size: 13px; }
+.compare-table td.col-achos { background: rgba(74,158,255,0.03); }
+.check { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; }
+.check.yes { background: rgba(74,158,255,0.12); color: var(--blue); }
+.check.no { background: rgba(255,255,255,0.04); color: var(--text-3); }
+.check.partial { background: var(--gold-dim); color: var(--gold); }
+
+/* ORIGIN */
+.section-origin { padding: 9rem 2rem; max-width: var(--max-text); margin: 0 auto; }
+.origin-inner { text-align: center; }
+.origin-icon { width: 80px; height: 80px; margin: 0 auto 1.5rem; object-fit: contain; display: block; opacity: 0.85; }
+.origin-word { font-family: 'Cinzel', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 400; letter-spacing: 0.08em; color: var(--text-1); margin-bottom: 0.25rem; display: block; }
+.origin-ipa { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 1.1rem; color: var(--text-3); margin-bottom: 2rem; display: block; }
+.origin-def { font-size: 1rem; color: var(--text-2); max-width: 480px; margin: 0 auto 4rem; line-height: 1.9; font-style: italic; }
+.origin-divider { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--border-md), transparent); margin: 0 auto 4rem; }
+.origin-body { text-align: left; max-width: 600px; margin: 0 auto; }
+.origin-body p { color: var(--text-2); font-size: 1rem; line-height: 1.9; margin-bottom: 1.5rem; }
+.origin-body p strong { color: var(--text-1); font-weight: 400; }
+.origin-cofi { margin-top: 3rem; padding: 2rem; background: var(--bg-1); border: 1px solid var(--border); border-top: 2px solid var(--blue); }
+.cofi-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.75rem; display: block; }
+.cofi-text { font-size: 13px; color: var(--text-2); line-height: 1.8; }
+.cofi-stat { display: flex; gap: 3rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.cofi-stat-num { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--text-1); display: block; }
+.cofi-stat-label { font-size: 11px; color: var(--text-3); }
+
+/* DOWNLOADS */
+.section-downloads { padding: 7rem 2rem; background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.downloads-inner { max-width: var(--max); margin: 0 auto; }
+.downloads-header { text-align: center; margin-bottom: 3.5rem; }
+.downloads-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.dl-card { background: var(--bg-2); border: 1px solid var(--border-md); border-radius: 8px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: border-color 0.25s, transform 0.25s; }
+.dl-card:hover { transform: translateY(-3px); }
+.dl-card:first-child:hover { border-color: var(--blue-border); }
+.dl-card:last-child:hover { border-color: var(--gold-border); }
+.dl-card-top { display: flex; align-items: flex-start; gap: 1rem; }
+.dl-icon-wrap { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dl-icon-wrap.blue { background: var(--blue-dim); border: 1px solid var(--blue-border); }
+.dl-icon-wrap.gold { background: var(--gold-dim); border: 1px solid var(--gold-border); }
+.dl-meta { display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
+.dl-tag { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; width: fit-content; }
+.dl-tag.blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.dl-tag.gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+.dl-size { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.08em; color: var(--text-3); }
+.dl-title { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-1); line-height: 1.3; }
+.dl-desc { color: var(--text-2); font-size: 14px; line-height: 1.8; flex: 1; }
+.dl-specs { display: flex; align-items: center; gap: 6px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase; }
+.dl-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 3px; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s, transform 0.2s; width: fit-content; margin-top: auto; }
+.dl-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.dl-btn.blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.dl-btn.gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+
+/* CTA */
+.section-cta { padding: 8rem 2rem; text-align: center; position: relative; overflow: hidden; }
+.section-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(74,158,255,0.06) 0%, transparent 70%); pointer-events: none; }
+.cta-inner { max-width: 560px; margin: 0 auto; position: relative; z-index: 1; }
+.cta-price { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; color: var(--text-1); display: block; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.cta-price-sub { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 2.5rem; }
+.cta-desc { color: var(--text-2); font-size: 1rem; line-height: 1.8; margin-bottom: 2.5rem; }
+.cta-actions { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.btn-appstore { display: inline-flex; align-items: center; gap: 12px; background: var(--text-1); color: var(--bg); text-decoration: none; padding: 14px 28px; border-radius: 10px; transition: opacity 0.2s, transform 0.2s; }
+.btn-appstore:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-appstore svg { width: 22px; height: 22px; }
+.btn-appstore-text { text-align: left; }
+.btn-appstore-small { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; opacity: 0.7; }
+.btn-appstore-large { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; display: block; margin-top: 1px; }
+.cta-req { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-top: 0.75rem; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 3rem 2rem; background: var(--bg-1); }
+.footer-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
+.footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.footer-logo { width: 24px; height: 24px; object-fit: contain; opacity: 0.6; }
+.footer-brand-name { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.14em; color: var(--text-2); }
+.footer-tagline { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); text-align: center; }
+.footer-links { display: flex; justify-content: flex-end; gap: 2rem; list-style: none; }
+.footer-links a { color: var(--text-3); text-decoration: none; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-2); }
+.footer-copy { grid-column: 1 / -1; text-align: center; font-size: 12px; color: var(--text-3); padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up-delay-1 { transition-delay: 0.1s; } .fade-up-delay-2 { transition-delay: 0.2s; } .fade-up-delay-3 { transition-delay: 0.3s; }
+
+/* ─── FEATURES CAROUSEL ─── */
+.feat-carousel-wrap { max-width: var(--max); margin: 0 auto; }
+.feat-carousel { overflow: hidden; position: relative; }
+.feat-slide {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 0 1px;
+  animation: slideIn 0.35s ease;
+}
+.feat-slide.active { display: grid; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+.feat-slide-text { display: flex; flex-direction: column; }
+.feat-slide-text .feature-num { margin-bottom: 1rem; }
+.feat-slide-text .feature-title { margin-bottom: 0.75rem; }
+.feat-slide-text .feature-desc { margin-bottom: 0; font-size: 15px; line-height: 1.8; color: var(--text-2); }
+.feat-slide-img {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-md);
+  background: var(--bg-2);
+}
+.feat-slide-img img { width: 100%; display: block; max-height: 520px; object-fit: contain; object-position: top; }
+.feat-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.feat-nav-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-md);
+  background: var(--bg-2);
+  color: var(--text-2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.feat-nav-btn:hover { border-color: var(--blue-border); color: var(--blue); }
+.feat-dots { display: flex; gap: 8px; align-items: center; }
+.feat-dot {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.feat-dot.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-dim); }
+.feat-dot:hover:not(.active) { border-color: var(--border-md); color: var(--text-2); }
+
+/* ─── GALLERY CAROUSEL ─── */
+.section-gallery {
+  padding: 6rem 2rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.gallery-inner { max-width: var(--max); margin: 0 auto; }
+.gallery-header { text-align: center; margin-bottom: 3rem; }
+.gallery-track-wrap {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border-md);
+  background: var(--bg-2);
+  position: relative;
+}
+.gallery-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.gallery-item {
+  min-width: 100%;
+  position: relative;
+}
+.gallery-label {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 10px 16px;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.8) 0%, transparent 100%);
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  z-index: 2;
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+  max-height: 600px;
+  object-fit: contain;
+  object-position: top center;
+  background: var(--bg-1);
+}
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  justify-content: center;
+}
+.gallery-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-md);
+  background: var(--bg-2);
+  color: var(--text-2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.gallery-btn:hover { border-color: var(--blue-border); color: var(--blue); }
+.gallery-progress {
+  width: 200px;
+  height: 2px;
+  background: var(--border-md);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.gallery-progress-bar {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 11.11%;
+}
+.gallery-counter {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+  min-width: 32px;
+}
+
+@media (max-width: 768px) {
+  .feat-slide { grid-template-columns: 1fr; gap: 1.5rem; }
+  .feat-slide-img img { max-height: 320px; }
+  .gallery-item img { max-height: 380px; }
+  .gallery-progress { width: 120px; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-visual { display: none; }
+  .path-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .feature-card.wide { grid-column: span 2; }
+  .stats-inner { grid-template-columns: repeat(3, 1fr); }
+  .stat-item:nth-child(3) { border-right: none; }
+  .stat-item:nth-child(4) { border-top: 1px solid var(--border); }
+  .showcase-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; text-align: center; }
+  .footer-links { justify-content: center; }
+  .downloads-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.wide { grid-column: span 1; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .compare-table { display: block; overflow-x: auto; }
+  .hero-h1 { font-size: 1.9rem; }
+  .cofi-stat { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/achos-icon.png" alt="Achos" class="nav-logo">
+      <span class="nav-name">ACHOS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#origin">Our Story</a></li>
+      <li><a href="#docs">Downloads</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+      <li><a href="#download" class="nav-cta">Download</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-cofi-badge">1 developer · 44 days · documented AI co-creation</div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Coming soon to Mac App Store
+      </div>
+      <h1 class="hero-h1">
+        Where your vinyl<br>and your files<br><em>finally share a shelf.</em>
+      </h1>
+      <p class="hero-sub">The macOS music player built for collectors who live between two worlds — physical records and digital files — and refuse to compromise on either.</p>
+      <div class="hero-actions">
+        <a href="#download" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          Download on Mac App Store
+        </a>
+        <a href="#features" class="btn-secondary">Explore features →</a>
+      </div>
+      <p class="hero-price"><strong>$39.99</strong> · One-time purchase · No subscription · Apple Silicon only</p>
+    </div>
+    <div class="hero-visual">
+      <div class="screen-frame">
+        <div class="screen-bar">
+          <div class="screen-dot red"></div>
+          <div class="screen-dot yellow"></div>
+          <div class="screen-dot green"></div>
+        </div>
+        <img src="assets/images/screenshot-hero.png" alt="Achos main playback window" class="screen-img">
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1;">
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--text-3));animation:scrollDown 2s ease-in-out infinite;"></div>
+    <span style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);">Scroll</span>
+  </div>
+</section>
+<style>@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top;opacity:0;}50%{transform:scaleY(1);opacity:1;}100%{transform:scaleY(0);transform-origin:bottom;opacity:0;}}</style>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <span class="stat-num">5<span>+</span></span>
+      <span class="stat-label">Lossless formats<br>including DSD</span>
+    </div>
+    <div class="stat-item fade-up fade-up-delay-1">
+      <span class="stat-num"><span>ITU</span></span>
+      <span class="stat-label">R BS.1770<br>professional standard</span>
+    </div>
+    <div class="stat-item fade-up fade-up-delay-2">
+      <span class="stat-num">0<span>×</span></span>
+      <span class="stat-label">DSP interference<br>pure BitPerfect</span>
+    </div>
+    <div class="stat-item blue-num fade-up fade-up-delay-2">
+      <span class="stat-num"><span>44</span></span>
+      <span class="stat-label">days · 1 developer<br>AI co-creation</span>
+    </div>
+    <div class="stat-item fade-up fade-up-delay-3">
+      <span class="stat-num">$<span>39</span></span>
+      <span class="stat-label">Once. No subscription,<br>ever.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section-problem fade-up">
+  <div class="section-eyebrow">The collector's ache</div>
+  <div class="problem-quote">"Your vinyl lives on Discogs. Your files live in Finder. Your curiosity lives nowhere."</div>
+  <div class="problem-divider"></div>
+  <p class="problem-body">You know the feeling. You're playing a first pressing — or what you <em>think</em> is a first pressing. You bought a hi-res download — or what the store <em>claimed</em> was hi-res. You want to know the story behind a recording — but that means fifteen browser tabs and an hour you don't have.</p>
+  <p class="problem-body"><strong>Every other app chose a side.</strong> Streamers forgot local files. Analyzers forgot playback. Players forgot the collector. No one built the app for the person who cares about all of it.</p>
+  <div class="problem-tension">
+    <div class="tension-side">
+      <svg class="tension-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#C9A227" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="24" cy="24" r="5" stroke="#C9A227" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="24" cy="24" r="1.5" fill="#C9A227" opacity="0.5"/></svg>
+      <span class="tension-label">Your vinyl</span>
+      <span class="tension-sub">Discogs collection<br>Physical pressings<br>Matrix numbers</span>
+    </div>
+    <div class="tension-bridge">
+      <div class="tension-bridge-line"></div>
+      <div class="tension-bridge-dot"></div>
+      <div class="tension-bridge-line"></div>
+    </div>
+    <div class="tension-side">
+      <svg class="tension-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="28" rx="3" stroke="#4A9EFF" stroke-width="1.2" fill="none" opacity="0.5"/><path d="M18 26 Q21 20 24 26 Q27 32 30 26" stroke="#4A9EFF" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/></svg>
+      <span class="tension-label">Your files</span>
+      <span class="tension-sub">FLAC, DSD, hi-res<br>Digital library<br>Unknown authenticity</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-features" id="features">
+  <div class="features-header fade-up">
+    <div class="section-eyebrow" style="justify-content:center;">Five pillars</div>
+    <h2 class="section-h2">Everything a Guardian needs.</h2>
+    <p class="section-sub">Not a feature list. Five answers to five problems that have bothered you for years.</p>
+  </div>
+  <!-- FEATURES CAROUSEL -->
+  <div class="feat-carousel-wrap">
+    <div class="feat-carousel" id="featCarousel">
+
+      <div class="feat-slide">
+        <div class="feat-slide-text">
+          <span class="feature-num">01 — Playback</span>
+          <div class="feature-icon-wrap blue" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="feature-title">BitPerfect. Always.</div>
+          <div class="feature-desc">Exclusive Mode (Hog Mode) bypasses macOS entirely. Your file reaches your DAC bit-for-bit identical. No resampling, no DSP, no EQ — nothing between you and the music.</div>
+          <div class="feature-pills" style="margin-top:1rem;">
+            <span class="feature-pill blue">Hog Mode</span>
+            <span class="feature-pill blue">DSD64 / DSD128</span>
+            <span class="feature-pill blue">DoP</span>
+            <span class="feature-pill blue">FLAC · ALAC · WAV</span>
+          </div>
+        </div>
+        <div class="feat-slide-img">
+          <img src="assets/images/screenshot-bitperfect-1.png" alt="Audio Settings — Exclusive Mode and Bit Perfect enabled">
+        </div>
+      </div>
+
+      <div class="feat-slide">
+        <div class="feat-slide-text">
+          <span class="feature-num">02 — AI Filemaster</span>
+          <div class="feature-icon-wrap gold" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div class="feature-title">Your hi-res files. Verified.</div>
+          <div class="feature-desc">Achos analyses the spectral fingerprint of every file and returns a forensic verdict. Verified. Inconclusive. Likely Upsampled. Likely Converted. The truth your download store won't tell you.</div>
+          <div class="feature-pills" style="margin-top:1rem;">
+            <span class="feature-pill gold">Gemini AI</span>
+            <span class="feature-pill gold">ITU-R BS.1770</span>
+            <span class="feature-pill gold">EBU R128</span>
+            <span class="feature-pill gold">Format fraud detection</span>
+          </div>
+        </div>
+        <div class="feat-slide-img">
+          <img src="assets/images/screenshot-aifilemaster.png" alt="AI Filemaster — VERIFIED verdict with spectral evidence">
+        </div>
+      </div>
+
+      <div class="feat-slide">
+        <div class="feat-slide-text">
+          <span class="feature-num">03 — GRaiL</span>
+          <div class="feature-icon-wrap gold" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="feature-title">Every record has a story. GRaiL finds it.</div>
+          <div class="feature-desc">While your music plays, GRaiL generates an original narrative about the recording — studio history, artist biography, pressing lineage, cultural context. The depth you always wanted, without the fifteen tabs.</div>
+          <div class="feature-pills" style="margin-top:1rem;">
+            <span class="feature-pill gold">Recording history</span>
+            <span class="feature-pill gold">Artist biography</span>
+            <span class="feature-pill gold">Studio context</span>
+            <span class="feature-pill gold">Cultural notes</span>
+          </div>
+        </div>
+        <div class="feat-slide-img">
+          <img src="assets/images/screenshot-grail.png" alt="GRaiL narrative for Nicola Conte — Wanin Moon Alternative Take">
+        </div>
+      </div>
+
+      <div class="feat-slide">
+        <div class="feat-slide-text">
+          <span class="feature-num">04 — Discogs</span>
+          <div class="feature-icon-wrap blue" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="feature-title">Know your pressing.</div>
+          <div class="feature-desc">OAuth sync with your Discogs collection. Pressing Intelligence identifies your exact release — label, catalogue number, country, tracklist, community data. Vinyl Oracle picks a random record when you can't choose.</div>
+          <div class="feature-pills" style="margin-top:1rem;">
+            <span class="feature-pill blue">OAuth 1.0a</span>
+            <span class="feature-pill blue">Pressing Intelligence</span>
+            <span class="feature-pill blue">Vinyl Oracle</span>
+          </div>
+        </div>
+        <div class="feat-slide-img">
+          <img src="assets/images/screenshot-pressing.png" alt="Pressing Intelligence — Chet Baker In Paris, Jazz Images Europe 2017">
+        </div>
+      </div>
+
+      <div class="feat-slide">
+        <div class="feat-slide-text">
+          <span class="feature-num">05 — Guardian's Path</span>
+          <div class="feature-icon-wrap gold" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="feature-title">The complete analysis journey.</div>
+          <div class="feature-desc">Full Analysis → AI Filemaster → GRaiL in strict verified sequence. Every step confirmed before the next begins. The protocol for the serious listener. Chain of custody for your music.</div>
+          <div class="feature-pills" style="margin-top:1rem;">
+            <span class="feature-pill gold">Verified sequence</span>
+            <span class="feature-pill gold">Full spectral analysis</span>
+            <span class="feature-pill gold">Chain of custody</span>
+          </div>
+        </div>
+        <div class="feat-slide-img">
+          <img src="assets/images/screenshot-journey.png" alt="Guardian's Path — The Three Steps: Full Analysis, AI Filemaster, GRaiL">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel nav -->
+    <div class="feat-carousel-nav">
+      <button class="feat-nav-btn" id="featPrev" aria-label="Previous feature">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="feat-dots" id="featDots">
+        <button class="feat-dot active" data-idx="0">01</button>
+        <button class="feat-dot" data-idx="1">02</button>
+        <button class="feat-dot" data-idx="2">03</button>
+        <button class="feat-dot" data-idx="3">04</button>
+        <button class="feat-dot" data-idx="4">05</button>
+      </div>
+      <button class="feat-nav-btn" id="featNext" aria-label="Next feature">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<!-- SCREENSHOT GALLERY CAROUSEL -->
+<section class="section-gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header fade-up">
+      <div class="section-eyebrow" style="justify-content:center;">Gallery</div>
+      <h2 class="section-h2">See it in action.</h2>
+    </div>
+    <div class="gallery-track-wrap fade-up">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-item">
+          <div class="gallery-label">Main player · Digital mode</div>
+          <img src="assets/images/screenshot-hero.png" alt="Achos main window — Digital mode idle">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Playing · BitPerfect · Hog Mode</div>
+          <img src="assets/images/screenshot-bitperfect-2.png" alt="Achos playing Curtis Mayfield 24bit 192kHz in Hog Mode">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Full Analysis · Spectral graph</div>
+          <img src="assets/images/screenshot-fullanalysis.png" alt="Full Analysis — spectral graph and loudness">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">AI Filemaster · Verified</div>
+          <img src="assets/images/screenshot-aifilemaster.png" alt="AI Filemaster — VERIFIED verdict">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">GRaiL · Musical narrative</div>
+          <img src="assets/images/screenshot-grail.png" alt="GRaiL narrative">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Guardian's Path · 3 of 3 complete</div>
+          <img src="assets/images/screenshot-path.png" alt="Guardian's Path complete">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Pressing Intelligence · Chet Baker</div>
+          <img src="assets/images/screenshot-pressing.png" alt="Pressing Intelligence">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Physical mode · Vinyl Oracle</div>
+          <img src="assets/images/screenshot-physical.png" alt="Physical mode — Vinyl Oracle">
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-label">Audio Settings · BitPerfect setup</div>
+          <img src="assets/images/screenshot-bitperfect-1.png" alt="Audio Settings — Exclusive Mode">
+        </div>
+      </div>
+    </div>
+    <div class="gallery-controls">
+      <button class="gallery-btn" id="galleryPrev" aria-label="Previous">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="gallery-progress">
+        <div class="gallery-progress-bar" id="galleryProgress"></div>
+      </div>
+      <button class="gallery-btn" id="galleryNext" aria-label="Next">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <span class="gallery-counter" id="galleryCounter">1 / 9</span>
+    </div>
+  </div>
+</section>
+
+<!-- GUARDIAN'S PATH -->
+<section class="section-path" id="path">
+  <div class="path-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">Guardian's Path</div>
+      <h2 class="section-h2" style="text-align:left;">Three steps.<br>The complete truth.</h2>
+      <p class="section-sub" style="text-align:left;margin:0 0 0.5rem;">Not a toolbar. A protocol. Guardian's Path is the structured analysis journey for listeners who want to know everything there is to know about a recording before they commit to it.</p>
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-num">I</div>
+          <div class="path-step-content">
+            <div class="path-step-title">Full Spectral Analysis</div>
+            <div class="path-step-desc">ITU-R BS.1770 True Peak measurement, EBU R128 integrated loudness, and full frequency spectrum graph. Every objective measurement about your file, rendered visually.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">II</div>
+          <div class="path-step-content">
+            <div class="path-step-title">AI Filemaster Verdict</div>
+            <div class="path-step-desc">The spectral fingerprint is sent to Gemini AI. The verdict arrives: Verified, Inconclusive, Likely Upsampled, or Likely Converted. No ambiguity.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">III</div>
+          <div class="path-step-content">
+            <div class="path-step-title">GRaiL Narrative</div>
+            <div class="path-step-desc">Only after the file is verified does GRaiL unlock. The recording's story — history, artists, studio, cultural context — delivered as you listen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="path-visual fade-up fade-up-delay-2">
+      <div class="path-screen">
+        <div class="path-screen-bar">
+          <div class="path-screen-dot" style="background:#ff5f57;"></div>
+          <div class="path-screen-dot" style="background:#febc2e;"></div>
+          <div class="path-screen-dot" style="background:#28c840;"></div>
+        </div>
+        <img src="assets/images/screenshot-path.png" alt="Guardian's Path — 3 of 3 steps complete, Full Guardian status">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section-compare">
+  <div class="compare-inner">
+    <div class="compare-header fade-up">
+      <div class="section-eyebrow" style="justify-content:center;">The landscape</div>
+      <h2 class="section-h2">Where everything else stops.</h2>
+      <p class="section-sub">Good tools exist for parts of the problem. Achos is the only one that holds the whole thing.</p>
+    </div>
+    <table class="compare-table fade-up">
+      <thead>
+        <tr>
+          <th style="width:28%">Capability</th>
+          <th class="col-achos" style="width:18%">Achos</th>
+          <th style="width:18%">Format Checker</th>
+          <th style="width:18%">Spectrum Viewer</th>
+          <th style="width:18%">Academic Analyser</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-feature">Audiophile playback (BitPerfect)</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">DSD native support</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">Spectral / format analysis</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check yes">✓</span></td><td><span class="check partial">◐</span></td><td><span class="check yes">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">AI forensic verdict</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">ITU-R BS.1770 / EBU R128</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check partial">◐</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">Discogs collection sync</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">Pressing Intelligence</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">AI musical narrative (GRaiL)</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check no">—</span></td><td><span class="check no">—</span></td><td><span class="check no">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature">One-time purchase</td>
+          <td class="col-achos"><span class="check yes">✓</span></td>
+          <td><span class="check yes">✓</span></td><td><span class="check yes">✓</span></td><td><span class="check yes">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;font-size:12px;color:var(--text-3);margin-top:1.25rem;font-family:'Cinzel',serif;letter-spacing:0.08em;">◐ Partial support &nbsp;·&nbsp; — Not available &nbsp;·&nbsp; Data reflects publicly available feature sets as of 2026.</p>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="section-origin" id="origin">
+  <div class="origin-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow" style="justify-content:center;">The name</div>
+      <img src="assets/images/achos-icon.png" alt="Achos — Spartan helmet with audio waveform" class="origin-icon">
+      <span class="origin-word">Áchos</span>
+      <span class="origin-ipa">ἄχος · Ancient Greek</span>
+      <p class="origin-def">"The deep ache of one who refuses compromised sound. The grief of the collector who knows something is wrong but has no tool to prove it."</p>
+    </div>
+    <div class="origin-divider"></div>
+    <div class="origin-body fade-up">
+      <p>Collectors know the ache. You hold a record you love and wonder — is this the real first pressing, or a later reissue? You play a hi-res file you paid good money for and something feels off. You want to know the story of what you're hearing but you'd need an hour you don't have. <strong>The tools existed for parts of the problem. No one had built the whole thing.</strong></p>
+      <p>Achos started as that frustration, turned into a question, turned into a project. The name comes from Homer — <em>ἄχος</em>, the specific ache of a person who knows what should exist but doesn't yet. Not sadness. Not anger. The particular tension of someone who refuses to accept less than what the music deserves.</p>
+      <p>The result is an app that lives where collectors actually live — <strong>at the intersection of physical and digital</strong>, of instinct and evidence, of listening and knowing. Where your vinyl and your files finally share a shelf.</p>
+      <div class="origin-cofi">
+        <span class="cofi-label">Built differently · Human-AI Co-Creation</span>
+        <p class="cofi-text">Achos was built by one person. Every architectural decision, every design principle, every line of code — produced over 44 consecutive days through a documented Human-AI co-creative process under the academic COFI framework. Not AI-assisted. Co-created. The evidence is in the download below: 49 sessions, 63 co-authored git commits, 4 case studies, and a methodology that Rezwana & Maher (ACM, 2023) would recognize immediately.</p>
+        <div class="cofi-stat">
+          <div>
+            <span class="cofi-stat-num">44</span>
+            <span class="cofi-stat-label">days concept to v1.0</span>
+          </div>
+          <div>
+            <span class="cofi-stat-num">1</span>
+            <span class="cofi-stat-label">developer. One obsession.</span>
+          </div>
+          <div>
+            <span class="cofi-stat-num">63</span>
+            <span class="cofi-stat-label">co-authored git commits</span>
+          </div>
+          <div>
+            <span class="cofi-stat-num">0</span>
+            <span class="cofi-stat-label">compromises on sound</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section class="section-downloads" id="docs">
+  <div class="downloads-inner">
+    <div class="downloads-header fade-up">
+      <div class="section-eyebrow" style="justify-content:center;">Documentation</div>
+      <h2 class="section-h2">Read the full story.</h2>
+      <p class="section-sub">Two documents for those who want to go deeper — the complete technical reference and the academic evidence of how Achos was built.</p>
+    </div>
+    <div class="downloads-grid fade-up">
+      <div class="dl-card">
+        <div class="dl-card-top">
+          <div class="dl-icon-wrap blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="dl-meta">
+            <span class="dl-tag blue">Technical Manual</span>
+            <span class="dl-size">PDF · 217 KB · v1.0</span>
+          </div>
+        </div>
+        <h3 class="dl-title">Achos Technical Manual</h3>
+        <p class="dl-desc">The complete reference for every feature, measurement standard, and methodology in Achos. Covers the dual-FFT architecture, ITU-R BS.1770 True Peak, EBU R128 loudness, DSD noise shaping analysis, brickwall detection, and the full fingerprint field reference. Written for collectors and audio engineers alike.</p>
+        <div class="dl-specs"><span>21 pages</span><span>·</span><span>Parts I–VI + Appendices</span><span>·</span><span>English</span></div>
+        <a href="downloads/Achos_Technical_Manual_v1_0.pdf" download class="dl-btn blue">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Manual
+        </a>
+      </div>
+      <div class="dl-card">
+        <div class="dl-card-top">
+          <div class="dl-icon-wrap gold">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="dl-meta">
+            <span class="dl-tag gold">COFI Evidence Report</span>
+            <span class="dl-size">PDF · 313 KB · v4 Final</span>
+          </div>
+        </div>
+        <h3 class="dl-title">Appendix A — Human‑AI Co‑Creation Evidence</h3>
+        <p class="dl-desc">The academic evidence corpus for Achos's 44-day COFI-conformant development. Documents 49 sessions, 63 co-authored git commits, 31 structured prompt files, and 4 detailed case studies — including the DSD bug sprint, the three-queue architecture negotiation, and the epistemic verdict taxonomy redesign. Co-authored by Martín Gallardo and Claude Sonnet 4.6.</p>
+        <div class="dl-specs"><span>20 pages</span><span>·</span><span>4 case studies</span><span>·</span><span>ACM COFI framework</span></div>
+        <a href="downloads/Achos_Appendix_A_COFI_v4_final.pdf" download class="dl-btn gold">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download COFI Report
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta" id="download">
+  <div class="cta-inner fade-up">
+    <div class="section-eyebrow" style="justify-content:center;">Download</div>
+    <span class="cta-price">$39.99</span>
+    <span class="cta-price-sub">One-time · No subscription · Yours forever</span>
+    <p class="cta-desc">Finally, an app that speaks collector. BitPerfect playback, AI file forensics, Discogs integration, and GRaiL — the complete tool for the Guardian of Sound.</p>
+    <div class="cta-actions">
+      <a href="https://apps.apple.com" class="btn-appstore">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="btn-appstore-text">
+          <span class="btn-appstore-small">Download on the</span>
+          <span class="btn-appstore-large">Mac App Store</span>
+        </div>
+      </a>
+      <span class="cta-req">Requires macOS 14 Sonoma · Apple Silicon only</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-brand">
+      <img src="assets/images/achos-icon.png" alt="Achos" class="footer-logo">
+      <span class="footer-brand-name">ACHOS</span>
+    </a>
+    <span class="footer-tagline">For the Guardians of Sound</span>
+    <ul class="footer-links">
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Martín Gallardo Arenas · Santiago, Chile · Achos is a trademark of Martín Gallardo Arenas · macOS and Mac App Store are trademarks of Apple Inc.</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+<script>
+// ── FEATURES CAROUSEL
+(function() {
+  var slides = document.querySelectorAll('.feat-slide');
+  var dots = document.querySelectorAll('.feat-dot');
+  var current = 0;
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  slides[0].classList.add('active');
+
+  document.getElementById('featNext').addEventListener('click', function() { goTo(current + 1); });
+  document.getElementById('featPrev').addEventListener('click', function() { goTo(current - 1); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  });
+})();
+
+// ── GALLERY CAROUSEL
+(function() {
+  var track = document.getElementById('galleryTrack');
+  var items = track.querySelectorAll('.gallery-item');
+  var counter = document.getElementById('galleryCounter');
+  var progress = document.getElementById('galleryProgress');
+  var total = items.length;
+  var current = 0;
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    counter.textContent = (current + 1) + ' / ' + total;
+    progress.style.width = ((current + 1) / total * 100) + '%';
+  }
+
+  document.getElementById('galleryNext').addEventListener('click', function() { goTo(current + 1); });
+  document.getElementById('galleryPrev').addEventListener('click', function() { goTo(current - 1); });
+
+  // Auto-advance every 4s
+  var timer = setInterval(function() { goTo(current + 1); }, 4000);
+  track.parentElement.addEventListener('mouseenter', function() { clearInterval(timer); });
+  track.parentElement.addEventListener('mouseleave', function() {
+    timer = setInterval(function() { goTo(current + 1); }, 4000);
+  });
+
+  // Touch swipe
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  });
+
+  goTo(0);
+})();
+</script>
+
+</body>
+</html>

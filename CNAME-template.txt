@@ -1,0 +1,10 @@
+When you register achos.app:
+1. Rename this file to: CNAME
+2. Replace this text with exactly: achos.app
+3. Configure DNS at your registrar:
+   A records → 185.199.108.153
+   A records → 185.199.109.153
+   A records → 185.199.110.153
+   A records → 185.199.111.153
+4. In GitHub repo Settings → Pages → enable "Enforce HTTPS"
+5. GitHub will provision the SSL certificate automatically via Let's Encrypt
